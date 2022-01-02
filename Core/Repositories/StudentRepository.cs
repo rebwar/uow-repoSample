@@ -51,5 +51,25 @@ namespace uow_repoSample.Core.Repositories
               return false;
            }
         }
+
+        public async override Task<bool> Delete(Guid id)
+        {
+           try
+           {
+                 var existStudent=await _dbSet.Where(x=>x.Id==id).FirstOrDefaultAsync();
+                 if(existStudent is null)
+                    return false;
+                 _dbSet.Remove(existStudent);
+                 return true;
+
+                
+           }
+           catch (Exception ex)
+           {
+               
+               _logger.LogError(ex,"{0} Delete Method Error ",typeof(StudentRepository));
+               return false;
+           }
+        }
     }
 }
