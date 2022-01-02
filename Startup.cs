@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using uow_repoSample.Core.IConfiguration;
 using uow_repoSample.Data;
 
 namespace uow_repoSample
@@ -31,6 +32,7 @@ namespace uow_repoSample
             services.AddDbContext<SchoolDbContext>(options=>{
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConn"));
             });
+            services.AddScoped<IUnitOfWork,UnitOfWork>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

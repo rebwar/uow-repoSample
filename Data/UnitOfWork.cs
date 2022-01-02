@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using uow_repoSample.Core.IConfiguration;
 using uow_repoSample.Core.IRepositories;
+using uow_repoSample.Core.Repositories;
 
 namespace uow_repoSample.Data
 {
@@ -15,7 +16,7 @@ namespace uow_repoSample.Data
         {
             _logger = loggerFactory.CreateLogger("log");
             _context = context;
-
+            Student=new StudentRepository(_context,_logger);
         }
 
         public async Task CompleteAsync()
